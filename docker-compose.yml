@@ -1,0 +1,26 @@
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      # Mount full source so code changes propagate without rebuilding
+      - ./src:/app/src
+      - ./main.py:/app/main.py
+      - ./model_config.yml:/app/model_config.yml
+      - ./scripts:/app/scripts
+      # Persist all training artifacts on host
+      - ./outputs:/app/outputs
+      - ./checkpoints:/app/src/Model_checkpoint
+      - ./visdom_data:/root/.visdom
+    hostname: slot-bert
+    ports:
+      - "8097:8097"
+    working_dir: /app
+    shm_size: '8g'
+    stdin_open: true
+    tty: true

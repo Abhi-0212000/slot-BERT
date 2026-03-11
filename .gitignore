@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Training artifacts (persisted via Docker bind mounts)
+checkpoints/
+visdom_data/
+outputs/
+
+# Large data files
+*.pkl
+*.pth
+*.pt
+*.ckpt
+
+# Sample outputs (generated, can be recreated)
+src/Data_samples/sample_outputs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Visdom
+.visdom/
